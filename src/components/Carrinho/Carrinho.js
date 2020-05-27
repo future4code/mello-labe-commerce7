@@ -3,11 +3,13 @@ import React, { Component } from "react"
 class Carrinho extends Component {
 
     state = {
-        listaDeCompras : [{id:10, name:"produto1",value:11.50, quant:3},{id:11, name:"produto3",value:15.50, quant:3}]
+        listaDeCompras : []
     }
 
+    
+
     render () {
-        const listaCarrinhoLi = this.state.listaDeCompras.map((produto) => {
+        const listaCarrinhoLi = this.props.listaDeCompras.map((produto) => {
             return(
 
                 <li key={produto.id}>
