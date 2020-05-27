@@ -12,7 +12,7 @@ class GradeDeProdutos extends Component {
                 <img src={produto.imageUrl} alt="produto" />
                 <p>{produto.name}</p>
                 <p>R${produto.value}</p>
-                <button>Colocar no carrinho</button>
+                <button onClick={this.props.adicionaProduto}>Colocar no carrinho</button>
             </li>
             )
         })

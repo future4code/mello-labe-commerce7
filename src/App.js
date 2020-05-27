@@ -12,7 +12,9 @@ class App extends Component {
   state = {
     listaDeProdutos: databaseProdutos, // usa o array de objetos importado
     listaDeProdutosOrdenada: [],
-    ordem: "crescente"
+    ordem: "crescente",
+    valorTotal: 0.00
+    
   }
 
   componentDidMount = () => {
@@ -50,6 +52,9 @@ class App extends Component {
       })
     }
   }
+  adicionaProduto = (event) => {
+    console.log(event.target)
+  }
 
   render() { 
     
@@ -63,9 +68,13 @@ class App extends Component {
           listaDeProdutosOrdenada={this.state.listaDeProdutosOrdenada}
           ordem={this.state.ordem}
           mudaOrdem={this.mudaOrdem}
+          adicionaProduto={this.adicionaProduto}
         />
 
-        <Carrinho />
+        <Carrinho 
+          valorTotal={this.state.valorTotal}
+          
+        />
 
       </div>  
     )
