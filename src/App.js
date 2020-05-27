@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 
 // importa o array de objetos de uma database
 import { databaseProdutos } from './database'
+import GradeDeProdutos from './components/GradeDeProdutos/GradeDeProdutos'
+import Carrinho from './components/Carrinho/Carrinho'
+import Filtro from './components/Filtro/Filtro'
 
 class App extends Component {
 
@@ -14,7 +17,9 @@ class App extends Component {
 
   componentDidMount = () => {
     // Cria uma cópia do array database de produtos
-    let novaListaOrdenada = [...this.state.listaDeProdutos]
+    let novaListaOrdenada = [...this.state.listaDeProdutos].sort(function (a,b) {
+      // Compara a propriedade value dos objetos e os organiza de cima para baixo (b - a)
+      return (a.value - b.value)})
 
     this.setState ({listaDeProdutosOrdenada: novaListaOrdenada})
   }
@@ -48,43 +53,19 @@ class App extends Component {
 
   render() { 
     
-    // Renderização por map() do array ordenado
-    const produtosLi = this.state.listaDeProdutosOrdenada.map(produto => {
-      return (
-        <li key={produto.id}>
-          <img src={produto.imageUrl} alt="produto" />
-          <p>{produto.name}</p>
-          <p>R${produto.value}</p>
-          <button>Colocar no carrinho</button>
-        </li>
-      )
-    })
-    
     return (
       
       <div className="App">
 
-        <div className="Filtro">
-          <h3>Filtro</h3>
-        </div>
+        <Filtro />
 
-        <div className="Produtos">
-          <h3>Produtos</h3>
-          <p>Quantidade de produtos: {this.state.listaDeProdutos.length}</p>
+        <GradeDeProdutos 
+          listaDeProdutosOrdenada={this.state.listaDeProdutosOrdenada}
+          ordem={this.state.ordem}
+          mudaOrdem={this.mudaOrdem}
+        />
 
-          <select value={this.state.ordem} onChange={this.mudaOrdem}> 
-            <option value="crescente">Valor Crescente</option>
-            <option value="decrescente">Valor Decrescente</option>
-          </select>
-
-          <ul>
-            {produtosLi}  
-          </ul>
-        </div>
-
-        <div className="Carrinho">
-          <h3>Carrinho</h3>
-        </div>
+        <Carrinho />
 
       </div>  
     )
