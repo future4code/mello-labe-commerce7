@@ -13,8 +13,8 @@ class App extends Component {
     listaDeProdutos: databaseProdutos, // usa o array de objetos importado
     listaDeProdutosOrdenada: [],
     ordem: "crescente",
-    valorTotal: 0.00
-    
+    valorTotal: 0.00,
+    listaDeCompras: []
   }
 
   componentDidMount = () => {
@@ -53,7 +53,29 @@ class App extends Component {
     }
   }
   adicionaProduto = (event) => {
-    console.log(event.target)
+    for (let produto of this.state.listaDeProdutosOrdenada ) {
+      if (produto.id === Number(event.target.id)){
+        let produtoSelecionado = produto
+        const novaListaDeCompras = [...this.state.listaDeCompras, produtoSelecionado]
+        this.setState({
+          listaDeCompras: novaListaDeCompras 
+        })
+      }
+      
+    }console.log(this.state.listaDeCompras)
+    
+    
+    
+    /* TALVEZ USAREMOS
+    const novaListaCarrinho = this.state.listaDeProdutosOrdenada.filter((produto) => {
+      
+      
+      return (produto.id === Number(event.target.id) )
+
+
+    })
+    */
+    
   }
 
   render() { 
@@ -73,6 +95,7 @@ class App extends Component {
 
         <Carrinho 
           valorTotal={this.state.valorTotal}
+          listaDeCompras={this.state.listaDeCompras}
           
         />
 
