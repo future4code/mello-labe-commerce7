@@ -16,7 +16,9 @@ class App extends Component {
     ordem: "crescente",
     valorMax: 2000000,
     valorMin: 0, 
-    buscaNome: ''
+    buscaNome: '',
+    valorTotal: 0.00,
+    listaDeCompras: []
   }
   
 
@@ -54,6 +56,31 @@ class App extends Component {
         listaDeProdutosOrdenada: novaListaOrdenada
       })
     }
+  }
+  adicionaProduto = (event) => {
+    for (let produto of this.state.listaDeProdutosOrdenada ) {
+      if (produto.id === Number(event.target.id)){
+        let produtoSelecionado = produto
+        const novaListaDeCompras = [...this.state.listaDeCompras, produtoSelecionado]
+        this.setState({
+          listaDeCompras: novaListaDeCompras 
+        })
+      }
+      
+    }console.log(this.state.listaDeCompras)
+    
+    
+    
+    /* TALVEZ USAREMOS
+    const novaListaCarrinho = this.state.listaDeProdutosOrdenada.filter((produto) => {
+      
+      
+      return (produto.id === Number(event.target.id) )
+
+
+    })
+    */
+    
   }
 
   mudaValorMinimo = (event) => {
@@ -109,11 +136,17 @@ class App extends Component {
         />
 
         <GradeDeProdutos 
-          listaDeProdutosOrdenada={this.state.listaDeProdutosOrdenada}
-          ordem={this.state.ordem}          
+          listaDeProdutosOrdenada={this.state.listaDeProdutosOrdenada}      
+          ordem={this.state.ordem}
+          mudaOrdem={this.mudaOrdem}
+          adicionaProduto={this.adicionaProduto}
         />
 
-        <Carrinho />
+        <Carrinho 
+          valorTotal={this.state.valorTotal}
+          listaDeCompras={this.state.listaDeCompras}
+          
+        />
 
       </div>  
     )
