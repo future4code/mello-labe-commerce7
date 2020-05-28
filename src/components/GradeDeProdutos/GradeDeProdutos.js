@@ -18,7 +18,6 @@ class GradeDeProdutos extends Component {
         })
 
         return (
-            
                 <div className="Produtos">
                 <p>Quantidade de produtos: {this.props.listaDeProdutosOrdenada.length}</p>
 
