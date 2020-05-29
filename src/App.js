@@ -7,16 +7,21 @@ import GradeDeProdutos from './components/GradeDeProdutos/GradeDeProdutos'
 import Carrinho from './components/Carrinho/Carrinho'
 import Filtro from './components/Filtro/Filtro'
 
+
 class App extends Component {
 
   state = {
     listaDeProdutos: databaseProdutos, // usa o array de objetos importado
     listaDeProdutosOrdenada: [],
     ordem: "crescente",
+    valorMax: 2000000,
+    valorMin: 0, 
+    buscaNome: '',
     valorTotal: 0.00,
     listaDeCompras: [],
     atualizou: false   
   }
+  
 
   componentDidMount = () => {
     // Cria uma cópia do array database de produtos
@@ -108,16 +113,61 @@ class App extends Component {
   }
 
 
+  mudaValorMinimo = (event) => {
+    const novaListaFiltrada = this.state.listaDeProdutos.filter(produto => {
+      return produto.value > event.target.value && produto.value < this.state.valorMax
+    })
+    const novoMinimo = (event.target.value)
+    this.setState ({
+      valorMin: novoMinimo,
+      listaDeProdutosOrdenada: novaListaFiltrada
+    })
+  console.log(novoMinimo)
+  }
+    
+  mudaValorMaximo = (event) => {
+    const novaListaFiltrada = this.state.listaDeProdutos.filter (produto => {
+      return produto.value < event.target.value && produto.value > this.state.valorMin
+    })
+    const novoMaximo = (event.target.value)
+    this.setState ({
+        valorMax: novoMaximo,
+        listaDeProdutosOrdenada: novaListaFiltrada
+    })
+  } 
+
+  mudaNome = (event) => {
+    const novaListaFiltrada = this.state.listaDeProdutos.filter (produto => {
+      const novoNome = event.target.value.toLowerCase() 
+       if (produto.name.toLowerCase().includes(novoNome)) {
+         return true 
+       } else {
+         return false
+       }
+    })
+    this.setState ({
+      buscaNome: event.target.value,
+      listaDeProdutosOrdenada: novaListaFiltrada
+    })
+    console.log(event.target)
+    }
+
+
   render() { 
+
     
     return (
       
       <div className="App">
 
-        <Filtro />
+        <Filtro
+          mudaValorMinimo={this.mudaValorMinimo}
+          mudaValorMaximo={this.mudaValorMaximo}
+          mudaNome={this.mudaNome}
+        />
 
         <GradeDeProdutos 
-          listaDeProdutosOrdenada={this.state.listaDeProdutosOrdenada}
+          listaDeProdutosOrdenada={this.state.listaDeProdutosOrdenada}      
           ordem={this.state.ordem}
           mudaOrdem={this.mudaOrdem}
           adicionaProduto={this.adicionaProduto}
