@@ -2,23 +2,34 @@ import React, { Component } from "react"
 
 class Carrinho extends Component {
 
-    state = {
-        listaDeCompras : []
+    atualizaTotal = () => {
+        console.log("chegou aqui")
+        if (this.props.listaDeCompras.length === 0) {
+            return 0
+        } else {
+            return this.props.listaDeCompras.reduce((total, produto) => {
+                return total + produto.quant * produto.value
+            }, 0)
+        }
+        
     }
-
-    
+       
 
     render () {
         const listaCarrinhoLi = this.props.listaDeCompras.map((produto) => {
+            console.log(this.props.listaDeCompras)
             return(
 
-                <li key={produto.id}>
-                    {produto.quant}
+                <li>
+                    
+                    {produto.quant}x 
                     {produto.name}
-                    <span>x</span>
+                    <span id={produto.id} onClick={this.props.removeProduto}>x</span>  
                 </li>
             )
         })
+
+        const valorTotal = this.atualizaTotal()
 
         return (
             <div className="Carrinho">
@@ -27,7 +38,7 @@ class Carrinho extends Component {
                     {listaCarrinhoLi}
 
                 </ul>
-                <p>Total: R${this.props.valorTotal.toFixed(2)}</p>
+                <p>Total: R${valorTotal.toFixed(2)}</p>
             </div>
         )
     }
