@@ -32,10 +32,6 @@ class App extends Component {
     this.setState ({listaDeProdutosOrdenada: novaListaOrdenada})
   }
 
-  componentDidUpdate = () => {
-    
-  }
-
   // Ordena o array de produtos conforme a opção selecionada (crescente/decrescente)
   mudaOrdem = (event) => {
     if (event.target.value === "crescente") {
@@ -120,10 +116,11 @@ class App extends Component {
     const novoMinimo = (event.target.value)
     this.setState ({
       valorMin: novoMinimo,
-      listaDeProdutosOrdenada: novaListaFiltrada
+      listaDeProdutosOrdenada: novaListaFiltrada 
+
     })
-  console.log(novoMinimo)
   }
+ 
     
   mudaValorMaximo = (event) => {
     const novaListaFiltrada = this.state.listaDeProdutos.filter (produto => {
@@ -149,7 +146,6 @@ class App extends Component {
       buscaNome: event.target.value,
       listaDeProdutosOrdenada: novaListaFiltrada
     })
-    console.log(event.target)
     }
 
 
