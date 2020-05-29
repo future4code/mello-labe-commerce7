@@ -14,7 +14,7 @@ class App extends Component {
     listaDeProdutos: databaseProdutos, // usa o array de objetos importado
     listaDeProdutosOrdenada: [],
     ordem: "crescente",
-    valorMax: 2000000,
+    valorMax: "20000000",
     valorMin: 0, 
     buscaNome: '',
     valorTotal: 0.00,
@@ -30,10 +30,6 @@ class App extends Component {
       return (a.value - b.value)})
 
     this.setState ({listaDeProdutosOrdenada: novaListaOrdenada})
-  }
-
-  componentDidUpdate = () => {
-    
   }
 
   // Ordena o array de produtos conforme a opção selecionada (crescente/decrescente)
@@ -120,20 +116,48 @@ class App extends Component {
     const novoMinimo = (event.target.value)
     this.setState ({
       valorMin: novoMinimo,
-      listaDeProdutosOrdenada: novaListaFiltrada
+      listaDeProdutosOrdenada: novaListaFiltrada 
+
     })
-  console.log(novoMinimo)
   }
+ 
     
   mudaValorMaximo = (event) => {
-    const novaListaFiltrada = this.state.listaDeProdutos.filter (produto => {
-      return produto.value < event.target.value && produto.value > this.state.valorMin
-    })
-    const novoMaximo = (event.target.value)
-    this.setState ({
-        valorMax: novoMaximo,
-        listaDeProdutosOrdenada: novaListaFiltrada
-    })
+    
+    if (this.state.valorMax.length === 1 && event.target.value === "") {
+      const geraListaOrdenada = (lista) => {
+        this.setState ({
+          listaDeProdutosOrdenada: lista
+        })
+      }
+      if (this.state.ordem === "crescente") {
+        const novaListaOrdenada = this.state.listaDeProdutos.sort((a, b) => {
+          return (a.value - b.value)
+        })
+        geraListaOrdenada(novaListaOrdenada)
+      } else {
+        const novaListaOrdenada = this.state.listaDeProdutos.sort((a, b) => {
+          return (b.value - a.value)
+        })
+        geraListaOrdenada(novaListaOrdenada)
+      }
+      
+      const novoMaximo = event.target.value
+      this.setState ({
+        valorMax: novoMaximo
+      })
+    } else {
+        
+        const novaListaFiltrada = this.state.listaDeProdutos.filter (produto => {
+          return produto.value < event.target.value && produto.value > this.state.valorMin
+        })
+        const novoMaximo = event.target.value
+        this.setState ({
+          valorMax: novoMaximo,
+          listaDeProdutosOrdenada: novaListaFiltrada
+        })
+    }
+    
   } 
 
   mudaNome = (event) => {
@@ -149,7 +173,6 @@ class App extends Component {
       buscaNome: event.target.value,
       listaDeProdutosOrdenada: novaListaFiltrada
     })
-    console.log(event.target)
     }
 
 

@@ -3,7 +3,7 @@ import React, { Component } from "react"
 class Carrinho extends Component {
 
     atualizaTotal = () => {
-        console.log("chegou aqui")
+        
         if (this.props.listaDeCompras.length === 0) {
             return 0
         } else {
@@ -17,14 +17,13 @@ class Carrinho extends Component {
 
     render () {
         const listaCarrinhoLi = this.props.listaDeCompras.map((produto) => {
-            console.log(this.props.listaDeCompras)
             return(
 
-                <li>
+                <li className="listaCarrinho">
                     
-                    {produto.quant}x 
-                    {produto.name}
-                    <span id={produto.id} onClick={this.props.removeProduto}>x</span>  
+                    <span>{produto.quant}x </span>  
+                    <span>{produto.name}</span> 
+                    <span id={produto.id} className="itemX" onClick={this.props.removeProduto}>x</span>  
                 </li>
             )
         })

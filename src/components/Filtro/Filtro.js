@@ -11,20 +11,20 @@ class Filtro extends Component {
           <h3>Filtro</h3>
           <p>Valor mínimo</p>  
           <input
-          type="number"
-          name="valorMin"
-          onChange={this.props.mudaValorMinimo}
+            type="number"
+            name="valorMin"
+            onChange={this.props.mudaValorMinimo}
           />
           <p>Valor máximo</p>  
           <input
-          type="number"
-          name="valorMax"
-          onChange={this.props.mudaValorMaximo}
+            type="number"
+            name="valorMax"
+            onChange={this.props.mudaValorMaximo}
           /> 
           <p>Buscar produto</p>  
           <input 
-          name="buscaNome"
-          onChange={this.props.mudaNome}
+            name="buscaNome"
+            onChange={this.props.mudaNome}
           />
         </div>
         )
