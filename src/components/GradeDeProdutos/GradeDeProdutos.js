@@ -4,7 +4,7 @@ class GradeDeProdutos extends Component {
     
 
     render() { 
-
+        
         // Renderização por map() do array ordenado
         const produtosLi = this.props.listaDeProdutosOrdenada.map(produto => {
             return (

@@ -19,11 +19,11 @@ class Carrinho extends Component {
         const listaCarrinhoLi = this.props.listaDeCompras.map((produto) => {
             return(
 
-                <li>
+                <li className="listaCarrinho">
                     
-                    {produto.quant}x 
-                    {produto.name}
-                    <span id={produto.id} onClick={this.props.removeProduto}>x</span>  
+                    <span>{produto.quant}x </span>  
+                    <span>{produto.name}</span> 
+                    <span id={produto.id} className="itemX" onClick={this.props.removeProduto}>x</span>  
                 </li>
             )
         })
