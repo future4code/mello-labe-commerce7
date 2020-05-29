@@ -14,7 +14,8 @@ class App extends Component {
     listaDeProdutosOrdenada: [],
     ordem: "crescente",
     valorTotal: 0.00,
-    listaDeCompras: []
+    listaDeCompras: [],
+    atualizou: false   
   }
 
   componentDidMount = () => {
@@ -24,6 +25,10 @@ class App extends Component {
       return (a.value - b.value)})
 
     this.setState ({listaDeProdutosOrdenada: novaListaOrdenada})
+  }
+
+  componentDidUpdate = () => {
+    
   }
 
   // Ordena o array de produtos conforme a opção selecionada (crescente/decrescente)
@@ -53,30 +58,55 @@ class App extends Component {
     }
   }
   adicionaProduto = (event) => {
-    for (let produto of this.state.listaDeProdutosOrdenada ) {
-      if (produto.id === Number(event.target.id)){
-        let produtoSelecionado = produto
-        const novaListaDeCompras = [...this.state.listaDeCompras, produtoSelecionado]
-        this.setState({
-          listaDeCompras: novaListaDeCompras 
-        })
-      }
-      
-    }console.log(this.state.listaDeCompras)
-    
-    
-    
-    /* TALVEZ USAREMOS
-    const novaListaCarrinho = this.state.listaDeProdutosOrdenada.filter((produto) => {
-      
-      
-      return (produto.id === Number(event.target.id) )
+     if (this.state.listaDeCompras.some(produto => produto.id === Number(event.target.id ) ) ) {
+         for ( let produto of this.state.listaDeCompras) {
+           
+           if (produto.id === Number(event.target.id)){
+             const novaListaDeCompras =  [...this.state.listaDeCompras]
+             novaListaDeCompras.forEach((produto) => {
+              if (produto.id === Number(event.target.id)){
+                produto.quant = produto.quant +1
+              }
+             })
+             this.setState({
+               listaDeCompras: novaListaDeCompras
+             })
+            }
+         }
 
-
-    })
-    */
-    
+        } else {
+          for (let produto of this.state.listaDeProdutos ) {
+              if (produto.id === Number(event.target.id)){
+                let produtoSelecionado = {
+                  id: produto.id, 
+                  name: produto.name,
+                  value: produto.value,
+                  quant: 1
+                }
+                
+                const novaListaDeCompras = [...this.state.listaDeCompras, produtoSelecionado]
+                this.setState({
+                  listaDeCompras: novaListaDeCompras 
+                })
+              }
+            
+          } 
+        } 
+        
+   
+      
   }
+   
+
+  removeProduto = (event) => { 
+    const listaCarrinhoNova = this.state.listaDeCompras.filter((produto) => {
+      return produto.id !== Number(event.target.id)
+    })
+    this.setState({
+      listaDeCompras: listaCarrinhoNova
+    })
+  }
+
 
   render() { 
     
@@ -96,7 +126,7 @@ class App extends Component {
         <Carrinho 
           valorTotal={this.state.valorTotal}
           listaDeCompras={this.state.listaDeCompras}
-          
+          removeProduto={this.removeProduto}
         />
 
       </div>  
