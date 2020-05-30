@@ -1,34 +1,61 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 
-class Filtro extends Component {
+const FiltroDiv = styled.div`
+  padding: 10px;
+`
+const FiltroTitulo = styled.h3 `
+  
+`
+const FormInput = styled.form`
+`
 
-  render () {
+const Filtro = (props) => {
+  const {atualizaInput} = props
+  
     
-      return (
-
-        <div className="Filtro">
-          
-          <h3>Filtro</h3>
-          <p>Valor mínimo</p>  
-          <input
-            type="number"
-            name="valorMin"
-            onChange={this.props.mudaValorMinimo}
-          />
-          <p>Valor máximo</p>  
-          <input
-            type="number"
-            name="valorMax"
-            onChange={this.props.mudaValorMaximo}
-          /> 
-          <p>Buscar produto</p>  
+  return (
+    <FiltroDiv>
+      <FiltroTitulo> Filtro </FiltroTitulo>
+        <FormInput>
+          <label htmlFor="valorMin">Valor Minimo:</label>
           <input 
-            name="buscaNome"
-            onChange={this.props.mudaNome}
+            name="valorMin"
+            id="valorMin"
+            type="number"
+            min={0}
+            onChange={atualizaInput}
+
           />
-        </div>
-        )
-    }
+        </FormInput>
+
+        <FormInput>
+          <label htmlFor="valorMax">Valor Máximo:</label>
+          <input 
+            name="valorMax"
+            id="valorMax"
+            type="number"
+            min={0}
+            onChange={atualizaInput}
+          />
+        </FormInput>
+
+        <FormInput>
+          <label htmlFor="textoBusca">Buscar Produto:</label>
+          <input 
+            name="textoBusca"
+            id="textoBusca"
+            type="text"
+            onChange={atualizaInput}
+          />
+        </FormInput>
+
+
+    </FiltroDiv>
+
+    
+  )
+    
 }
 
 export default Filtro

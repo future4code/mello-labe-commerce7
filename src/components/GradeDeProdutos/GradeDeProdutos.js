@@ -1,40 +1,54 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
+import CardProduto from '../CardProduto/CardProduto'
 
-class GradeDeProdutos extends Component {
+const GradeDeProdutosDiv = styled.div`
+    padding: 10px;
+`
+const GradeDeProdutosHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+const HeaderTitulo = styled.h4`
+`
+const SelectOrdem = styled.select`
+`
+const CardGridProduto = styled.div`
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+`
+
+
+const GradeDeProdutos = (props) => {
+    const {listaDeProdutos, mudaOrdem} = props
     
-
-    render() { 
-        
-        // Renderização por map() do array ordenado
-        const produtosLi = this.props.listaDeProdutosOrdenada.map(produto => {
-            return (
-            <li key={produto.id}>
-                <img src={produto.imageUrl} alt="produto" />
-                <p>{produto.name}</p>
-                <p>R${produto.value}</p>
-                <button id={produto.id} onClick={this.props.adicionaProduto}>Colocar no carrinho</button>
-            </li>
-            )
-        })
-
-        return (
-                <div className="Produtos">
-                <p>Quantidade de produtos: {this.props.listaDeProdutosOrdenada.length}</p>
-
-                <select value={this.props.ordem} onChange={this.props.mudaOrdem}> 
-                    <option value="crescente">Valor Crescente</option>
-                    <option value="decrescente">Valor Decrescente</option>
-                </select>
-
-                <ul>
-                    {produtosLi}  
-                </ul>
-            </div>
-        )
+    
+    return (
+        <GradeDeProdutosDiv>
+            <GradeDeProdutosHeader>
+                <HeaderTitulo>Quantidade de Produtos: {listaDeProdutos.length} </HeaderTitulo>
+                <SelectOrdem onChange={mudaOrdem}>
+                    <option value="crescente">Crescente</option>
+                    <option value="decrescente">Decrescente</option>
+                </SelectOrdem>
+            </GradeDeProdutosHeader>
+            <CardGridProduto>
+                {listaDeProdutos.map((produto) => (
+                    <CardProduto 
+                        key={produto.name}
+                        produto={produto}
+                    />
+                ))}
+                
+            </CardGridProduto>
+            
+        </GradeDeProdutosDiv>   
+    )
         
 
-    }
-
+    
 }
+
 
 export default GradeDeProdutos
