@@ -47,4 +47,4 @@ export const databaseProdutos = [
       value: 99.11,
       imageUrl: "https://picsum.photos/500/500?random=8"
     }
-]
+] 

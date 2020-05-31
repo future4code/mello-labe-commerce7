@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import CardProduto from '../CardProduto/CardProduto'
 
@@ -18,11 +18,8 @@ const CardGridProduto = styled.div`
     gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 `
-
-
 const GradeDeProdutos = (props) => {
-    const {listaDeProdutos, mudaOrdem} = props
-    
+    const {listaDeProdutos, mudaOrdem, adicionaProduto} = props 
     
     return (
         <GradeDeProdutosDiv>
@@ -38,16 +35,13 @@ const GradeDeProdutos = (props) => {
                     <CardProduto 
                         key={produto.name}
                         produto={produto}
+                        adicionaProduto={adicionaProduto}
                     />
-                ))}
-                
+                ))}  
             </CardGridProduto>
             
         </GradeDeProdutosDiv>   
-    )
-        
-
-    
+    )    
 }
 
 

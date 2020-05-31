@@ -16,7 +16,6 @@ const AppDiv = styled.div`
   > div {
     border: 2px solid;  
   }
-
 `
 
 class App extends Component {
@@ -26,7 +25,8 @@ class App extends Component {
     ordem: "crescente",
     valorMin: null,
     valorMax: null,
-    textoBusca: ""
+    textoBusca: "",
+    carrinho: []
   }
 
   pegaListaDeProdutos = () => {
@@ -55,9 +55,31 @@ class App extends Component {
     })
   }
 
+  adicionaProduto = (produto) => {
+    const novoCarrinho = [...this.state.carrinho]
+    const produtoIndex = novoCarrinho.findIndex(item => item.produtoInfo.id === produto.id )
+    if (produtoIndex === -1) {
+      novoCarrinho.push({produtoInfo: produto, quantidade: 1 })
+    } else {
+        novoCarrinho[produtoIndex].quantidade += 1
+    }
+    this.setState ({
+      carrinho: novoCarrinho 
+    })
+  }
+
+  removeProduto = (produto) => {
+    const novoCarrinho = [...this.state.carrinho]
+    const produtoIndex = novoCarrinho.findIndex(item => item.produtoInfo.id === produto.id)
+    
+    novoCarrinho.splice(produtoIndex, 1)
+
+    this.setState ({
+      carrinho: novoCarrinho 
+    })
+  }
 
   render () {
-
     const listaDeProdutos = this.pegaListaDeProdutos()
     const produtosOrdenados = listaDeProdutos.sort((produtoA, produtoB) => {
       if (this.state.ordem === "crescente")  {
@@ -77,9 +99,13 @@ class App extends Component {
         <GradeDeProdutos 
           listaDeProdutos={produtosOrdenados}
           mudaOrdem={this.mudaOrdem}
+          adicionaProduto={this.adicionaProduto}
         />
 
-        <Carrinho />
+        <Carrinho
+          carrinho={this.state.carrinho}
+          removeProduto={this.removeProduto}
+        />
         
       </AppDiv>
     )

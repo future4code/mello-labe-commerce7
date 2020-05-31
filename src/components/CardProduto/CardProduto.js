@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 
@@ -10,8 +10,7 @@ const CardDiv = styled.div`
     border: 2px dotted orange;
     padding: 7px;
     > img {
-        width: 100%;
-        
+        width: 100%; 
     }
 
     > p {
@@ -30,30 +29,22 @@ const CardDiv = styled.div`
             background-color: orange;
         }
     }
-
-
 `
 
 
 
 const CardProduto = (props) => {
 
-    const {produto} = props
+    const {produto, adicionaProduto} = props
 
     return (
         <CardDiv>
-            <img src={produto.imageUrl} />
+            <img src={produto.imageUrl} alt="produto" />
             <p>R$ {produto.value}</p>
             <p>{produto.name}</p>
-            
-            <button>Adicionar ao Carrinho</button>
-            
+            <button onClick={() => adicionaProduto(produto)}>Adicionar ao Carrinho</button>    
         </CardDiv>
     )
 }
-
-
-
-
 
 export default CardProduto

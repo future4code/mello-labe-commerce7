@@ -1,18 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 const FiltroDiv = styled.div`
   padding: 10px;
 `
 const FiltroTitulo = styled.h3 `
-  
 `
 const FormInput = styled.form`
 `
-
 const Filtro = (props) => {
   const {atualizaInput} = props
-  
     
   return (
     <FiltroDiv>
@@ -25,7 +22,6 @@ const Filtro = (props) => {
             type="number"
             min={0}
             onChange={atualizaInput}
-
           />
         </FormInput>
 
@@ -50,12 +46,8 @@ const Filtro = (props) => {
           />
         </FormInput>
 
-
-    </FiltroDiv>
-
-    
-  )
-    
+    </FiltroDiv>  
+  )    
 }
 
 export default Filtro
