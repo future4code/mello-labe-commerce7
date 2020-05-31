@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "./grade.css"
 
 class GradeDeProdutos extends Component {
     
@@ -19,13 +20,16 @@ class GradeDeProdutos extends Component {
 
         return (
                 <div className="Produtos">
-                <p>Quantidade de produtos: {this.props.listaDeProdutosOrdenada.length}</p>
+                    <header>
+                    
+                        <p>Quantidade de produtos:  {this.props.listaDeProdutosOrdenada.length}</p>           
 
-                <select value={this.props.ordem} onChange={this.props.mudaOrdem}> 
-                    <option value="crescente">Valor Crescente</option>
-                    <option value="decrescente">Valor Decrescente</option>
-                </select>
+                        <select value={this.props.ordem} onChange={this.props.mudaOrdem}> 
+                            <option value="crescente">Valor Crescente</option>
+                            <option value="decrescente">Valor Decrescente</option>
+                        </select>
 
+                    </header>
                 <ul>
                     {produtosLi}  
                 </ul>
