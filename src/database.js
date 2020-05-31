@@ -1,50 +1,46 @@
+
+import pedraUm from './components/Imagens/pedra(1).png'
+import pedraDois from './components/Imagens/pedra(2).png'
+import pedraTres from './components/Imagens/pedra(3).png'
+import pedraQuatro from './components/Imagens/pedra(4).png'
+import pedraCinco from './components/Imagens/pedra(5).png'
+import pedraSeis from './components/Imagens/pedra(6).png'
+
 export const databaseProdutos = [
     {
       id: 1, 
-      name: "Pack de cerveja",
+      name: "Pedra da Lua",
       value: 10.55, 
-      imageUrl: "https://picsum.photos/500/500?random=1"
+      imageUrl: pedraUm
     }, 
     {
       id: 2, 
-      name: "Roupa de Chapolin",
+      name: "Pedra de Marte",
       value: 20.78, 
-      imageUrl: "https://picsum.photos/500/500?random=2"
+      imageUrl: pedraDois
     }, 
     {
       id: 3, 
-      name: "Pinheiro",
+      name: "Pedra de Saturno",
       value: 100.32, 
-      imageUrl: "https://picsum.photos/500/500?random=3"
+      imageUrl: pedraTres
     },
     {
       id: 4, 
-      name: "Arvore de laranja",
+      name: "Pedra do Plutão",
       value: 90.28,
-      imageUrl: "https://picsum.photos/500/500?random=4"
+      imageUrl: pedraQuatro
     }, 
     {
       id: 5, 
-      name: "Amor pra vida inteira",
+      name: "Pedra de Urano",
       value: 56.45, 
-      imageUrl: "https://picsum.photos/500/500?random=5"
+      imageUrl: pedraCinco
     }, 
     {
       id: 6, 
-      name: "Pastel",
+      name: "Pedra de Mercúrio",
       value: 80.57,
-      imageUrl: "https://picsum.photos/500/500?random=6"
-    },
-    {
-      id: 7, 
-      name: "Letreiro",
-      value: 23.55,
-      imageUrl: "https://picsum.photos/500/500?random=7"
-    },
-    {
-      id: 8, 
-      name: "Piano",
-      value: 99.11,
-      imageUrl: "https://picsum.photos/500/500?random=8"
+      imageUrl: pedraSeis
     }
 ]

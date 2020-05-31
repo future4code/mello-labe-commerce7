@@ -8,6 +8,7 @@ import Carrinho from './components/Carrinho/Carrinho'
 import Filtro from './components/Filtro/Filtro'
 
 
+
 class App extends Component {
 
   state = {
@@ -93,9 +94,6 @@ class App extends Component {
             
           } 
         } 
-        
-   
-      
   }
    
 
