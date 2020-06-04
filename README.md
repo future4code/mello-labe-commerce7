@@ -1,1 +1,6 @@
-Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
+# E-Commerce Time 7
+##    Laís Petra
+##    Thiago Stephen
+##    Yuzo Santana Okamoto
+
+## [Link do Surge](https://comfortable-lace.surge.sh)
