@@ -1,46 +1,37 @@
-import React, { Component } from "react"
+import React from "react"
+import styled from 'styled-components' 
 
-class Carrinho extends Component {
+const CarrinhoDiv = styled.div`
+`
+const CarrinhoTitulo = styled.h3`
+    margin: 5px;
+`
+const Carrinho = (props) => {
+    const {carrinho, removeProduto} = props
 
-    atualizaTotal = () => {
-        
-        if (this.props.listaDeCompras.length === 0) {
-            return 0
-        } else {
-            return this.props.listaDeCompras.reduce((total, produto) => {
-                return total + produto.quant * produto.value
-            }, 0)
-        }
-        
-    }
-       
+    return(
+        <CarrinhoDiv>
+            
+            <CarrinhoTitulo> Carrinho </CarrinhoTitulo>
 
-    render () {
-        const listaCarrinhoLi = this.props.listaDeCompras.map((produto) => {
-            return(
-
-                <li className="listaCarrinho">
-                    
-                    <span>{produto.quant}x </span>  
-                    <span>{produto.name}</span> 
-                    <span id={produto.id} className="itemX" onClick={this.props.removeProduto}>x</span>  
-                </li>
-            )
-        })
-
-        const valorTotal = this.atualizaTotal()
-
-        return (
-            <div className="Carrinho">
-                <h3>Carrinho:</h3>
-                <ul>
-                    {listaCarrinhoLi}
-
-                </ul>
-                <p>Total: R${valorTotal.toFixed(2)}</p>
-            </div>
-        )
-    }
+            {carrinho.map((produto) => {
+               return (
+                <div key={produto.produtoInfo.name}>
+                    {produto.quantidade} X 
+                    {produto.produtoInfo.name}
+                    <span onClick={() => removeProduto(produto)}> X </span>
+                </div>
+               )
+            })}
+            <p>
+                Total: R$ 
+                {(carrinho.reduce((contador, produto) => {
+                    return contador += produto.produtoInfo.value * produto.quantidade
+                },0)).toFixed(2)}
+            </p>  
+        </CarrinhoDiv>          
+    )      
 }
+
 
 export default Carrinho
